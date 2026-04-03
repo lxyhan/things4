@@ -1,0 +1,213 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: 480px;
+  background: var(--color-bg-main);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-popover);
+  overflow: hidden;
+  font-family: var(--font-family);
+}
+
+/* Input section */
+.inputSection {
+  padding: 16px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.titleInput {
+  width: 100%;
+  box-sizing: border-box;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+
+.titleInput::placeholder {
+  color: var(--color-text-placeholder);
+  font-weight: var(--font-weight-regular);
+}
+
+.notesInput {
+  width: 100%;
+  box-sizing: border-box;
+  background: none;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: var(--font-family);
+  font-size: var(--font-size-notes);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+.notesInput::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+/* Tag chips */
+.tagChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 0 16px 8px;
+}
+
+.tagChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  background: var(--color-bg-tag);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-meta);
+  color: var(--color-text-secondary);
+}
+
+.tagChipDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tagChipRemove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  padding: 0;
+  line-height: 1;
+}
+
+.tagChipRemove:hover {
+  color: var(--color-text-primary);
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-accent-header);
+  gap: 8px;
+}
+
+.toolbarLeft {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.toolbarRight {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.toolBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 8px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-meta);
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
+  transition: background 0.1s, color 0.1s, border-color 0.1s;
+}
+
+.toolBtn:hover {
+  background: var(--color-bg-main);
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.toolBtnActive {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: rgba(0, 122, 255, 0.06);
+}
+
+.toolBtnDeadline {
+  color: var(--color-deadline-soon);
+  border-color: var(--color-deadline-soon);
+  background: rgba(255, 149, 0, 0.06);
+}
+
+.toolIcon {
+  font-size: 11px;
+}
+
+.clearBtn {
+  font-size: 13px;
+  line-height: 1;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+}
+
+.clearBtn:hover {
+  color: var(--color-text-primary);
+}
+
+.cancelBtn {
+  padding: 5px 12px;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-meta);
+  color: var(--color-text-secondary);
+  transition: background 0.1s;
+}
+
+.cancelBtn:hover {
+  background: var(--color-bg-main);
+}
+
+.saveBtn {
+  padding: 5px 14px;
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-meta);
+  font-weight: var(--font-weight-medium);
+  color: #ffffff;
+  transition: opacity 0.1s;
+}
+
+.saveBtn:hover {
+  opacity: 0.88;
+}
+
+.saveBtnDisabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

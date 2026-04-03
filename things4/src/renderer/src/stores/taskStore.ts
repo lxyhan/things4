@@ -2,25 +2,6 @@ import { create } from 'zustand'
 import type { Task } from '../../../types'
 import type { ViewId } from './uiStore'
 
-// window.api is exposed by the preload (Phase 2A). During development it may not exist.
-declare global {
-  interface Window {
-    api?: {
-      views?: {
-        inbox: () => Promise<Task[]>
-        today: () => Promise<Task[]>
-        upcoming: () => Promise<Task[]>
-        anytime: () => Promise<Task[]>
-        logbook: () => Promise<Task[]>
-      }
-      tasks?: {
-        complete: (id: string) => Promise<void>
-        cancel: (id: string) => Promise<void>
-      }
-    }
-  }
-}
-
 interface TasksByView {
   inbox: Task[]
   today: Task[]
