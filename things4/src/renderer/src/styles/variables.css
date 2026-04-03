@@ -1,0 +1,135 @@
+/* ================================================================
+   LIGHT MODE (default)
+   Sidebar uses backdrop-filter blur to approximate NSVisualEffectView
+   ================================================================ */
+:root {
+  /* Backgrounds */
+  --color-bg-main:              #FFFFFF;
+  --color-bg-sidebar:           #EFEDE8;
+  --color-bg-sidebar-blur:      rgba(239, 237, 232, 0.85);
+  --color-bg-task-expanded:     #F5F5F5;
+  --color-bg-task-hover:        rgba(0, 122, 255, 0.08);
+  --color-bg-tag:               #E5E5EA;
+  --color-bg-accent-header:     #F2F2F7;
+
+  /* Text — Apple system label colors */
+  --color-text-primary:         #1C1C1E;
+  --color-text-secondary:       #3C3C43;
+  --color-text-tertiary:        #8E8E93;
+  --color-text-placeholder:     #C7C7CC;
+
+  /* Borders */
+  --color-border:               rgba(0, 0, 0, 0.1);
+  --color-border-strong:        rgba(0, 0, 0, 0.18);
+
+  /* Semantic */
+  --color-accent:               #007AFF;
+  --color-deadline-soon:        #FF9500;
+  --color-deadline-over:        #FF3B30;
+  --color-evening:              #5856D6;
+  --color-today-star:           #FFCC00;
+  --color-progress-fill:        #007AFF;
+
+  /* Shadows */
+  --shadow-task-card:           0 2px 12px rgba(0, 0, 0, 0.08);
+  --shadow-popover:             0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* ================================================================
+   DARK MODE
+   Values from reverse-engineered things-3-clone (Yanis-Gerst)
+   ================================================================ */
+:root[data-theme="dark"] {
+  --color-bg-main:              #23262A;
+  --color-bg-sidebar:           #1F2225;
+  --color-bg-sidebar-blur:      rgba(31, 34, 37, 0.9);
+  --color-bg-task-expanded:     #2D3033;
+  --color-bg-task-hover:        #244271;
+  --color-bg-accent-header:     #393C3F;
+  --color-bg-tag:               #44474A;
+
+  --color-text-primary:         #FBFBFB;
+  --color-text-secondary:       #D2D3D3;
+  --color-text-tertiary:        #696B6D;
+  --color-text-placeholder:     #4A4A4F;
+
+  --color-border:               #44464A;
+  --color-border-strong:        #191B1E;
+
+  --color-accent:               #2473E7;
+  --color-deadline-soon:        #FF9F0A;
+  --color-deadline-over:        #F34D61;
+  --color-evening:              #6E6CE8;
+  --color-today-star:           #FFD60A;
+  --color-progress-fill:        #2473E7;
+
+  --shadow-task-card:           0px 0px 8px 2px rgba(0, 0, 0, 0.2);
+  --shadow-popover:             0px 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ================================================================
+   TYPOGRAPHY
+   Things 3 uses SF Pro exclusively (native -apple-system)
+   ================================================================ */
+:root {
+  --font-family:                -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+
+  /* Sizes */
+  --font-size-task-title:       15px;
+  --font-size-task-expanded:    16px;
+  --font-size-notes:            14px;
+  --font-size-checklist:        14px;
+  --font-size-meta:             12px;
+  --font-size-sidebar-item:     13px;
+  --font-size-area-label:       13px;
+  --font-size-section-header:   22px;
+  --font-size-month-header:     34px;
+
+  /* Weights */
+  --font-weight-regular:        400;
+  --font-weight-medium:         500;
+  --font-weight-semibold:       600;
+  --font-weight-bold:           700;
+
+  /* Line heights */
+  --line-height-body:           1.4;
+  --line-height-ui:             1.2;
+
+  -webkit-font-smoothing:       antialiased;
+}
+
+/* ================================================================
+   SPACING & LAYOUT
+   ================================================================ */
+:root {
+  --sidebar-width:              220px;
+
+  /* Task rows */
+  --task-row-height:            44px;
+  --task-row-padding-x:         16px;
+  --task-row-padding-y:         4px;
+
+  /* Expanded task card */
+  --task-card-padding:          8px 16px 16px;
+  --task-card-margin-y:         24px;
+  --task-card-border-radius:    8px;
+
+  /* Checklist */
+  --checklist-indent:           28px;
+
+  /* Sidebar */
+  --sidebar-item-padding:       6px 12px;
+
+  /* Section gaps */
+  --section-gap:                24px;
+
+  /* Radii */
+  --radius-sm:                  4px;
+  --radius-md:                  8px;
+  --radius-lg:                  12px;
+  --radius-pill:                9999px;
+
+  /* Checkbox */
+  --checkbox-size:              20px;
+  --checkbox-anim-interval:     15ms;
+}
