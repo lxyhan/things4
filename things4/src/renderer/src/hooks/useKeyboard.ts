@@ -60,6 +60,14 @@ export function useKeyboard(): void {
     }
 
     const handler = (e: KeyboardEvent): void => {
+      // Esc always closes search, even when input is focused
+      if (e.key === "Escape" && ui.searchFocused) {
+        e.preventDefault();
+        e.stopPropagation();
+        ui.setSearchFocused(false);
+        return;
+      }
+
       if (isTypingTarget(document.activeElement)) return;
 
       const meta = e.metaKey;

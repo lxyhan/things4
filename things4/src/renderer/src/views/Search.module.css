@@ -1,0 +1,182 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--color-bg-main);
+  color: var(--color-text-primary);
+}
+
+/* ── Search bar ─────────────────────────────────────────────── */
+
+.searchBarWrapper {
+  padding: 20px 32px 12px;
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-bg-task-expanded);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--color-text-tertiary);
+}
+
+.input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: var(--font-family);
+  font-size: var(--font-size-task-title);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-ui);
+}
+
+.input::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.clearBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: none;
+  background: var(--color-bg-tag);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.clearBtn:hover {
+  background: var(--color-border-strong);
+  color: var(--color-text-primary);
+}
+
+.clearBtn svg {
+  width: 8px;
+  height: 8px;
+}
+
+/* ── Results area ───────────────────────────────────────────── */
+
+.results {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 32px 24px;
+}
+
+.hint {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-notes);
+  margin-top: 24px;
+  text-align: center;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Result item ────────────────────────────────────────────── */
+
+.resultItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: var(--task-row-height);
+  padding: 10px var(--task-row-padding-x);
+  border-bottom: 1px solid var(--color-border);
+  cursor: default;
+}
+
+.resultItem:hover {
+  background-color: var(--color-bg-task-hover);
+  border-radius: var(--radius-sm);
+}
+
+/* Circle bullet for active tasks */
+.bullet {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  border: 1.5px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+}
+
+/* Filled bullet for completed/cancelled */
+.bulletDone {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  border: 1.5px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-border-strong);
+}
+
+.resultBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--font-size-task-title);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.titleDone {
+  font-size: var(--font-size-task-title);
+  color: var(--color-text-tertiary);
+  text-decoration: line-through;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notes {
+  font-size: var(--font-size-notes);
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.statusBadge {
+  flex-shrink: 0;
+  font-size: var(--font-size-meta);
+  color: var(--color-text-tertiary);
+  align-self: center;
+}
+
+/* ── Highlight ──────────────────────────────────────────────── */
+
+.highlight {
+  background: transparent;
+  color: var(--color-accent);
+  font-weight: var(--font-weight-semibold);
+}

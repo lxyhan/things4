@@ -133,7 +133,6 @@ function buildGroups(tasks: Task[]): Group[] {
   });
 }
 
-
 export function Upcoming(): React.JSX.Element {
   const { tasksByView, loading, loadTasks } = useTaskStore();
   const tasks = tasksByView.upcoming;

@@ -8,11 +8,20 @@ import { Upcoming } from "./views/Upcoming";
 import { Anytime } from "./views/Anytime";
 import { Logbook } from "./views/Logbook";
 import { ProjectDetail } from "./views/ProjectDetail";
+import { Search } from "./views/Search";
 import { QuickEntry } from "./components/QuickEntry/QuickEntry";
 import styles from "./App.module.css";
 
 function MainContent(): React.JSX.Element {
-  const { activeView, activeProjectId } = useUIStore();
+  const { activeView, activeProjectId, searchFocused } = useUIStore();
+
+  if (searchFocused) {
+    return (
+      <div className={styles.main}>
+        <Search />
+      </div>
+    );
+  }
 
   return (
     <div className={styles.main}>
