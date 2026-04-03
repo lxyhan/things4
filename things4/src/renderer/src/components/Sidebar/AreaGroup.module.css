@@ -1,0 +1,47 @@
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  padding: var(--sidebar-item-padding);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-area-label);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  text-align: left;
+}
+
+.header:hover {
+  background-color: var(--color-bg-task-hover);
+}
+
+.chevron {
+  font-size: 10px;
+  color: var(--color-text-tertiary);
+  transition: transform 0.15s ease;
+  transform: rotate(90deg);
+  display: inline-block;
+  width: 10px;
+  flex-shrink: 0;
+}
+
+.chevronCollapsed {
+  transform: rotate(0deg);
+}
+
+.label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.projects {
+  padding-left: 8px;
+}

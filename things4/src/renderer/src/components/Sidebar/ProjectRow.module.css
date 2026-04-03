@@ -1,0 +1,29 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: var(--sidebar-item-padding);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sidebar-item);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  text-align: left;
+}
+
+.row:hover {
+  background-color: var(--color-bg-task-hover);
+}
+
+.active {
+  background-color: var(--color-bg-task-hover);
+  color: var(--color-text-primary);
+}
+
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}

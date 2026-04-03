@@ -1,0 +1,85 @@
+.sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.panel {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg-sidebar-blur);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 12px 8px;
+}
+
+.systemViews {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.viewItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: var(--sidebar-item-padding);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sidebar-item);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  text-align: left;
+}
+
+.viewItem:hover {
+  background-color: var(--color-bg-task-hover);
+}
+
+.viewItemActive {
+  background-color: var(--color-bg-task-hover);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.icon {
+  width: 16px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  flex-shrink: 0;
+}
+
+.viewItemActive .icon {
+  color: var(--color-accent);
+}
+
+.viewLabel {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--color-border);
+  margin: 8px 4px;
+}
+
+.areaList {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ungrouped {
+  display: flex;
+  flex-direction: column;
+}
