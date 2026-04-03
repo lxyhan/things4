@@ -1,0 +1,76 @@
+.row {
+  display: flex;
+  align-items: center;
+  height: var(--task-row-height);
+  padding: var(--task-row-padding-y) var(--task-row-padding-x);
+  gap: 10px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background-color 150ms ease;
+  user-select: none;
+}
+
+.row:hover {
+  background-color: var(--color-bg-task-hover);
+}
+
+.row.selected {
+  background-color: var(--color-bg-task-hover);
+}
+
+.row.expanded {
+  /* Expanded state is handled by TaskCard rendering below */
+  background-color: transparent;
+}
+
+.title {
+  flex: 1;
+  font-size: var(--font-size-task-title);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: var(--line-height-ui);
+}
+
+.badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.todayStar {
+  color: var(--color-today-star);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.whenBadge {
+  font-size: var(--font-size-meta);
+  color: var(--color-text-tertiary);
+  background-color: var(--color-bg-tag);
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.deadlineBadge {
+  font-size: var(--font-size-meta);
+  color: var(--color-text-tertiary);
+  background-color: var(--color-bg-tag);
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.deadlineUrgent {
+  color: var(--color-deadline-soon);
+  background-color: transparent;
+}
+
+.deadlineOverdue {
+  color: var(--color-deadline-over);
+  background-color: transparent;
+}

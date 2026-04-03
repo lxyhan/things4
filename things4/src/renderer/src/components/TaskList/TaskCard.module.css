@@ -1,0 +1,196 @@
+.card {
+  background-color: var(--color-bg-task-expanded);
+  border-radius: var(--task-card-border-radius);
+  box-shadow: var(--shadow-task-card);
+  padding: var(--task-card-padding);
+  margin: var(--task-card-margin-y) var(--task-row-padding-x);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  /* Expand/collapse transition applied by parent wrapper */
+  animation: expandIn 300ms ease-out;
+}
+
+@keyframes expandIn {
+  from {
+    opacity: 0;
+    transform: scaleY(0.95);
+    transform-origin: top;
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.titleInput {
+  flex: 1;
+  font-size: var(--font-size-task-expanded);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-family);
+  line-height: var(--line-height-ui);
+  padding: 0;
+}
+
+.titleInput::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size-meta);
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-tag);
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.pillLabel {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-tertiary);
+}
+
+.pillDeadline {
+  color: var(--color-deadline-soon);
+}
+
+.notes {
+  width: 100%;
+  font-size: var(--font-size-notes);
+  color: var(--color-text-primary);
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: vertical;
+  font-family: var(--font-family);
+  line-height: var(--line-height-body);
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 60px;
+}
+
+.notes::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: var(--checklist-indent);
+}
+
+.checklistItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checklistCheckbox {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  cursor: pointer;
+  accent-color: var(--color-accent);
+}
+
+.checklistTitle {
+  font-size: var(--font-size-checklist);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-ui);
+}
+
+.checklistDone {
+  text-decoration: line-through;
+  color: var(--color-text-tertiary);
+}
+
+.waitingRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.waitingLabel {
+  font-size: var(--font-size-meta);
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
+  font-weight: var(--font-weight-medium);
+}
+
+.waitingInput {
+  flex: 1;
+  font-size: var(--font-size-meta);
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  outline: none;
+  font-family: var(--font-family);
+  padding: 2px 0;
+}
+
+.waitingInput::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  padding-top: 4px;
+}
+
+.btnSave {
+  font-size: var(--font-size-meta);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  color: #fff;
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 4px 12px;
+  cursor: pointer;
+}
+
+.btnSave:hover {
+  opacity: 0.9;
+}
+
+.btnCancel {
+  font-size: var(--font-size-meta);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 12px;
+  cursor: pointer;
+}
+
+.btnCancel:hover {
+  background-color: var(--color-bg-task-hover);
+}
