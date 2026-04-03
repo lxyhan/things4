@@ -119,9 +119,7 @@ export function TaskCard({
     const added = newIds.filter((id) => !tagIds.includes(id));
     const removed = tagIds.filter((id) => !newIds.includes(id));
     await Promise.all([
-      ...added.map((tagId) =>
-        window.api?.tags?.attachToTask?.(tagId, task.id),
-      ),
+      ...added.map((tagId) => window.api?.tags?.attachToTask?.(tagId, task.id)),
       ...removed.map((tagId) =>
         window.api?.tags?.detachFromTask?.(tagId, task.id),
       ),
@@ -158,9 +156,7 @@ export function TaskCard({
           ]
             .filter(Boolean)
             .join(" ")}
-          onClick={() =>
-            setOpenPicker(openPicker === "when" ? null : "when")
-          }
+          onClick={() => setOpenPicker(openPicker === "when" ? null : "when")}
           title="Set when date"
         >
           {whenDate ? formatDate(whenDate) : "When"}
