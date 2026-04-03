@@ -33,7 +33,9 @@
   font-size: var(--font-size-meta);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
-  transition: background 0.1s, border-color 0.1s;
+  transition:
+    background 0.1s,
+    border-color 0.1s;
 }
 
 .quickBtn:hover {

@@ -19,7 +19,9 @@
 .dayHeader {
   font-size: var(--font-size-section-header);
   font-weight: var(--font-weight-bold);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue",
+    sans-serif;
   color: var(--color-text-primary);
   margin-bottom: 8px;
 }
@@ -27,7 +29,9 @@
 .weekHeader {
   font-size: var(--font-size-section-header);
   font-weight: var(--font-weight-bold);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue",
+    sans-serif;
   color: var(--color-text-secondary);
   margin-bottom: 8px;
 }
@@ -35,7 +39,9 @@
 .monthHeader {
   font-size: var(--font-size-month-header);
   font-weight: var(--font-weight-bold);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue",
+    sans-serif;
   color: var(--color-text-primary);
   margin-bottom: 8px;
 }

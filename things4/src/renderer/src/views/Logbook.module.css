@@ -18,7 +18,9 @@
 .groupHeader {
   font-size: var(--font-size-section-header);
   font-weight: var(--font-weight-bold);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue",
+    sans-serif;
   color: var(--color-text-tertiary);
   margin-bottom: 8px;
 }

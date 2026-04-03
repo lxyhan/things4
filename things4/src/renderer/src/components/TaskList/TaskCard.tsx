@@ -1,70 +1,81 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import type { ChecklistItem, Task } from '../../../../types'
-import { useTaskStore } from '../../stores/taskStore'
-import { Checkbox } from './Checkbox'
-import styles from './TaskCard.module.css'
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import type { ChecklistItem, Task } from "../../../../types";
+import { useTaskStore } from "../../stores/taskStore";
+import { Checkbox } from "./Checkbox";
+import styles from "./TaskCard.module.css";
 
 interface TaskCardProps {
-  task: Task
-  onCollapse: () => void
+  task: Task;
+  onCollapse: () => void;
 }
 
-export function TaskCard({ task, onCollapse }: TaskCardProps): React.JSX.Element {
-  const { optimisticComplete } = useTaskStore()
+export function TaskCard({
+  task,
+  onCollapse,
+}: TaskCardProps): React.JSX.Element {
+  const { optimisticComplete } = useTaskStore();
 
-  const [title, setTitle] = useState(task.title)
-  const [notes, setNotes] = useState(task.notes ?? '')
-  const [waitingFor, setWaitingFor] = useState(task.waiting_for ?? '')
-  const [checklist, setChecklist] = useState<ChecklistItem[]>(task.checklist ?? [])
+  const [title, setTitle] = useState(task.title);
+  const [notes, setNotes] = useState(task.notes ?? "");
+  const [waitingFor, setWaitingFor] = useState(task.waiting_for ?? "");
+  const [checklist, setChecklist] = useState<ChecklistItem[]>(
+    task.checklist ?? [],
+  );
 
-  const titleRef = useRef<HTMLInputElement>(null)
+  const titleRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    titleRef.current?.focus()
-  }, [])
+    titleRef.current?.focus();
+  }, []);
 
   const save = useCallback(() => {
     // Optimistic save — IPC not yet wired in Phase 3D
     // When IPC is available this would call window.api.tasks.update(...)
-    onCollapse()
-  }, [onCollapse])
+    onCollapse();
+  }, [onCollapse]);
 
   const cancel = useCallback(() => {
     // Restore original values
-    setTitle(task.title)
-    setNotes(task.notes ?? '')
-    setWaitingFor(task.waiting_for ?? '')
-    setChecklist(task.checklist ?? [])
-    onCollapse()
-  }, [task, onCollapse])
+    setTitle(task.title);
+    setNotes(task.notes ?? "");
+    setWaitingFor(task.waiting_for ?? "");
+    setChecklist(task.checklist ?? []);
+    onCollapse();
+  }, [task, onCollapse]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        cancel()
-      } else if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
-        save()
+      if (e.key === "Escape") {
+        cancel();
+      } else if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+        save();
       }
     },
-    [save, cancel]
-  )
+    [save, cancel],
+  );
 
   function handleChecklistToggle(id: string): void {
     setChecklist((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, completed: !item.completed } : item))
-    )
+      prev.map((item) =>
+        item.id === id ? { ...item, completed: !item.completed } : item,
+      ),
+    );
   }
 
   function formatDate(iso: string | null): string {
-    if (!iso) return ''
-    return new Date(iso).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
+    if (!iso) return "";
+    return new Date(iso).toLocaleDateString(undefined, {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
   }
 
   return (
     <div className={styles.card} onKeyDown={handleKeyDown}>
       <div className={styles.titleRow}>
         <Checkbox
-          completed={task.status === 'completed'}
+          completed={task.status === "completed"}
           onComplete={() => optimisticComplete(task.id)}
           onUncomplete={onCollapse}
         />
@@ -86,7 +97,7 @@ export function TaskCard({ task, onCollapse }: TaskCardProps): React.JSX.Element
             </span>
           )}
           {task.deadline && (
-            <span className={[styles.pill, styles.pillDeadline].join(' ')}>
+            <span className={[styles.pill, styles.pillDeadline].join(" ")}>
               <span className={styles.pillLabel}>Deadline</span>
               {formatDate(task.deadline)}
             </span>
@@ -113,9 +124,12 @@ export function TaskCard({ task, onCollapse }: TaskCardProps): React.JSX.Element
                 className={styles.checklistCheckbox}
               />
               <span
-                className={[styles.checklistTitle, item.completed ? styles.checklistDone : '']
+                className={[
+                  styles.checklistTitle,
+                  item.completed ? styles.checklistDone : "",
+                ]
                   .filter(Boolean)
-                  .join(' ')}
+                  .join(" ")}
               >
                 {item.title}
               </span>
@@ -145,5 +159,5 @@ export function TaskCard({ task, onCollapse }: TaskCardProps): React.JSX.Element
         </button>
       </div>
     </div>
-  )
+  );
 }

@@ -23,7 +23,9 @@
 .title {
   font-size: var(--font-size-month-header);
   font-weight: var(--font-weight-bold);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue",
+    sans-serif;
   color: var(--color-text-primary);
   line-height: var(--line-height-ui);
   cursor: text;
@@ -38,7 +40,9 @@
 .titleInput {
   font-size: var(--font-size-month-header);
   font-weight: var(--font-weight-bold);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue",
+    sans-serif;
   color: var(--color-text-primary);
   line-height: var(--line-height-ui);
   background: none;
@@ -89,7 +93,9 @@
 .headingTitle {
   font-size: var(--font-size-section-header);
   font-weight: var(--font-weight-bold);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue",
+    sans-serif;
   color: var(--color-text-primary);
   margin-bottom: 8px;
   padding-bottom: 4px;

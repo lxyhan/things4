@@ -1,35 +1,35 @@
-import React from 'react'
-import { AreaGroup } from './AreaGroup'
-import { useUIStore } from '../../stores/uiStore'
-import type { ViewId } from '../../stores/uiStore'
-import type { Area, Project } from '../../../../types'
-import styles from './Sidebar.module.css'
+import React from "react";
+import { AreaGroup } from "./AreaGroup";
+import { useUIStore } from "../../stores/uiStore";
+import type { ViewId } from "../../stores/uiStore";
+import type { Area, Project } from "../../../../types";
+import styles from "./Sidebar.module.css";
 
 interface ProjectWithCounts extends Project {
-  completedCount: number
-  totalCount: number
+  completedCount: number;
+  totalCount: number;
 }
 
 interface SidebarProps {
-  areas?: Area[]
-  projectsByArea?: Record<string, ProjectWithCounts[]>
-  ungroupedProjects?: ProjectWithCounts[]
+  areas?: Area[];
+  projectsByArea?: Record<string, ProjectWithCounts[]>;
+  ungroupedProjects?: ProjectWithCounts[];
 }
 
 const SYSTEM_VIEWS: { id: ViewId; label: string; icon: string }[] = [
-  { id: 'inbox', label: 'Inbox', icon: '●' },
-  { id: 'today', label: 'Today', icon: '★' },
-  { id: 'upcoming', label: 'Upcoming', icon: '▦' },
-  { id: 'anytime', label: 'Anytime', icon: '◻' },
-  { id: 'logbook', label: 'Logbook', icon: '↗' }
-]
+  { id: "inbox", label: "Inbox", icon: "●" },
+  { id: "today", label: "Today", icon: "★" },
+  { id: "upcoming", label: "Upcoming", icon: "▦" },
+  { id: "anytime", label: "Anytime", icon: "◻" },
+  { id: "logbook", label: "Logbook", icon: "↗" },
+];
 
 export function Sidebar({
   areas = [],
   projectsByArea = {},
-  ungroupedProjects = []
+  ungroupedProjects = [],
 }: SidebarProps): React.JSX.Element {
-  const { activeView, setActiveView } = useUIStore()
+  const { activeView, setActiveView } = useUIStore();
 
   return (
     <nav className={styles.sidebar}>
@@ -38,7 +38,7 @@ export function Sidebar({
           {SYSTEM_VIEWS.map(({ id, label, icon }) => (
             <li key={id}>
               <button
-                className={`${styles.viewItem} ${activeView === id ? styles.viewItemActive : ''}`}
+                className={`${styles.viewItem} ${activeView === id ? styles.viewItemActive : ""}`}
                 onClick={() => setActiveView(id)}
               >
                 <span className={styles.icon}>{icon}</span>
@@ -58,7 +58,7 @@ export function Sidebar({
               {ungroupedProjects.map((p) => (
                 <button
                   key={p.id}
-                  className={`${styles.viewItem} ${activeView === 'project' ? styles.viewItemActive : ''}`}
+                  className={`${styles.viewItem} ${activeView === "project" ? styles.viewItemActive : ""}`}
                   onClick={() => useUIStore.getState().setActiveProjectId(p.id)}
                 >
                   <span className={styles.viewLabel}>{p.title}</span>
@@ -77,5 +77,5 @@ export function Sidebar({
         </div>
       </div>
     </nav>
-  )
+  );
 }

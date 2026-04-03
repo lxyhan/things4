@@ -80,4 +80,4 @@ CREATE INDEX IF NOT EXISTS idx_tasks_status     ON tasks(status);
 CREATE INDEX IF NOT EXISTS idx_projects_area    ON projects(area_id);
 CREATE INDEX IF NOT EXISTS idx_projects_status  ON projects(status);
 CREATE INDEX IF NOT EXISTS idx_headings_project ON headings(project_id);
-`
+`;

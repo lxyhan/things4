@@ -1,20 +1,23 @@
-import React, { useState } from 'react'
-import { ProjectRow } from './ProjectRow'
-import type { Area, Project } from '../../../../types'
-import styles from './AreaGroup.module.css'
+import React, { useState } from "react";
+import { ProjectRow } from "./ProjectRow";
+import type { Area, Project } from "../../../../types";
+import styles from "./AreaGroup.module.css";
 
 interface ProjectWithCounts extends Project {
-  completedCount: number
-  totalCount: number
+  completedCount: number;
+  totalCount: number;
 }
 
 interface AreaGroupProps {
-  area: Area
-  projects: ProjectWithCounts[]
+  area: Area;
+  projects: ProjectWithCounts[];
 }
 
-export function AreaGroup({ area, projects }: AreaGroupProps): React.JSX.Element {
-  const [collapsed, setCollapsed] = useState(false)
+export function AreaGroup({
+  area,
+  projects,
+}: AreaGroupProps): React.JSX.Element {
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
     <div className={styles.group}>
@@ -23,7 +26,11 @@ export function AreaGroup({ area, projects }: AreaGroupProps): React.JSX.Element
         onClick={() => setCollapsed((c) => !c)}
         aria-expanded={!collapsed}
       >
-        <span className={`${styles.chevron} ${collapsed ? styles.chevronCollapsed : ''}`}>▸</span>
+        <span
+          className={`${styles.chevron} ${collapsed ? styles.chevronCollapsed : ""}`}
+        >
+          ▸
+        </span>
         <span className={styles.label}>{area.title}</span>
       </button>
       {!collapsed && (
@@ -39,5 +46,5 @@ export function AreaGroup({ area, projects }: AreaGroupProps): React.JSX.Element
         </div>
       )}
     </div>
-  )
+  );
 }
