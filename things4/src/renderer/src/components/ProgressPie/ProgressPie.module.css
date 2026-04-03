@@ -1,0 +1,13 @@
+.pie {
+  flex-shrink: 0;
+}
+
+.track {
+  stroke: var(--color-border);
+}
+
+.fill {
+  stroke: var(--color-progress-fill);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s ease;
+}
