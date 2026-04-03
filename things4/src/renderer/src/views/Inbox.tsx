@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import { useTaskStore } from "../stores/taskStore";
+import { useUIStore } from "../stores/uiStore";
+import { TaskList } from "../components/TaskList/TaskList";
 import styles from "./Inbox.module.css";
 
 export function Inbox(): React.JSX.Element {
   const { tasksByView, loading, loadTasks } = useTaskStore();
+  const { newTaskRequested, clearNewTaskRequest } = useUIStore();
   const tasks = tasksByView.inbox;
 
   useEffect(() => {
@@ -11,40 +14,22 @@ export function Inbox(): React.JSX.Element {
   }, [loadTasks]);
 
   useEffect(() => {
-    function handleKeyDown(e: KeyboardEvent): void {
-      if ((e.metaKey || e.ctrlKey) && e.key === "n") {
-        e.preventDefault();
-        window.api?.tasks
-          ?.create({ title: "", status: "active" })
-          .then(() => loadTasks("inbox"))
-          .catch(() => undefined);
-      }
+    if (newTaskRequested) {
+      clearNewTaskRequest();
+      window.api?.tasks
+        ?.create({ title: "", status: "active" })
+        .then(() => loadTasks("inbox"))
+        .catch(() => undefined);
     }
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [loadTasks]);
+  }, [newTaskRequested, clearNewTaskRequest, loadTasks]);
 
   if (loading && tasks.length === 0) {
     return <div className={styles.container} />;
   }
 
-  if (tasks.length === 0) {
-    return (
-      <div className={styles.container}>
-        <div className={styles.empty}>Your inbox is clear</div>
-      </div>
-    );
-  }
-
   return (
     <div className={styles.container}>
-      <ul className={styles.taskList}>
-        {tasks.map((task) => (
-          <li key={task.id} className={styles.taskRow}>
-            <span className={styles.taskTitle}>{task.title}</span>
-          </li>
-        ))}
-      </ul>
+      <TaskList tasks={tasks} view="inbox" />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useTaskStore } from "../stores/taskStore";
 import type { Task } from "../../../types";
+import { TaskList } from "../components/TaskList/TaskList";
 import styles from "./Logbook.module.css";
 
 function completionDateKey(task: Task): string {
@@ -71,18 +72,7 @@ export function Logbook(): React.JSX.Element {
       {groups.map((group) => (
         <section key={group.dateKey} className={styles.group}>
           <h2 className={styles.groupHeader}>{group.label}</h2>
-          <ul className={styles.taskList}>
-            {group.tasks.map((task) => (
-              <li key={task.id} className={styles.taskRow}>
-                <span
-                  className={`${styles.statusIcon} ${task.status === "cancelled" ? styles.cancelled : styles.completed}`}
-                >
-                  {task.status === "cancelled" ? "✕" : "✓"}
-                </span>
-                <span className={styles.taskTitle}>{task.title}</span>
-              </li>
-            ))}
-          </ul>
+          <TaskList tasks={group.tasks} view="logbook" />
         </section>
       ))}
     </div>

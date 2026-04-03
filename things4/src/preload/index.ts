@@ -39,6 +39,11 @@ contextBridge.exposeInMainWorld("api", {
     update: (id: string, input: unknown) =>
       ipcRenderer.invoke("tags:update", id, input),
     delete: (id: string) => ipcRenderer.invoke("tags:delete", id),
+    forTask: (taskId: string) => ipcRenderer.invoke("tags:forTask", taskId),
+    attachToTask: (tagId: string, taskId: string) =>
+      ipcRenderer.invoke("tags:attachToTask", tagId, taskId),
+    detachFromTask: (tagId: string, taskId: string) =>
+      ipcRenderer.invoke("tags:detachFromTask", tagId, taskId),
   },
   views: {
     inbox: () => ipcRenderer.invoke("tasks:list", "inbox"),

@@ -112,3 +112,16 @@ export function detachFromProject(tagId: string, projectId: string): void {
     "DELETE FROM project_tags WHERE project_id = ? AND tag_id = ?",
   ).run(projectId, tagId);
 }
+
+export function forTask(taskId: string): Tag[] {
+  const db = getDatabase();
+  const rows = db
+    .prepare(
+      `SELECT t.* FROM tags t
+       INNER JOIN task_tags tt ON tt.tag_id = t.id
+       WHERE tt.task_id = ?
+       ORDER BY t.position ASC`,
+    )
+    .all(taskId);
+  return rows as Tag[];
+}
