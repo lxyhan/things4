@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import type { Heading, Task } from "../../../../types";
 import type { ViewId } from "../../stores/uiStore";
+import { useUIStore } from "../../stores/uiStore";
 import { HeadingRow } from "./HeadingRow";
 import { TaskCard } from "./TaskCard";
 import { TaskRow } from "./TaskRow";
@@ -35,6 +36,14 @@ export function TaskList({
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { pendingExpandId, setPendingExpandId } = useUIStore();
+
+  useEffect(() => {
+    if (pendingExpandId) {
+      setExpandedId(pendingExpandId);
+      setPendingExpandId(null);
+    }
+  }, [pendingExpandId, setPendingExpandId]);
 
   // Build interleaved list
   const items: ListItem[] = [];

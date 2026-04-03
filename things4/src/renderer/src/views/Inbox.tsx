@@ -6,7 +6,7 @@ import styles from "./Inbox.module.css";
 
 export function Inbox(): React.JSX.Element {
   const { tasksByView, loading, loadTasks } = useTaskStore();
-  const { newTaskRequested, clearNewTaskRequest } = useUIStore();
+  const { newTaskRequested, clearNewTaskRequest, setPendingExpandId } = useUIStore();
   const tasks = tasksByView.inbox;
 
   useEffect(() => {
@@ -18,10 +18,13 @@ export function Inbox(): React.JSX.Element {
       clearNewTaskRequest();
       window.api?.tasks
         ?.create({ title: "", status: "active" })
-        .then(() => loadTasks("inbox"))
+        .then((task) => {
+          if (task?.id) setPendingExpandId(task.id);
+          return loadTasks("inbox");
+        })
         .catch(() => undefined);
     }
-  }, [newTaskRequested, clearNewTaskRequest, loadTasks]);
+  }, [newTaskRequested, clearNewTaskRequest, loadTasks, setPendingExpandId]);
 
   if (loading && tasks.length === 0) {
     return <div className={styles.container} />;

@@ -16,6 +16,7 @@ interface UIState {
   activeProjectId: string | null;
   openPicker: "when" | "deadline" | null;
   newTaskRequested: boolean;
+  pendingExpandId: string | null;
   searchFocused: boolean;
   quickEntryOpen: boolean;
 
@@ -28,6 +29,7 @@ interface UIState {
   setOpenPicker: (picker: "when" | "deadline" | null) => void;
   requestNewTask: () => void;
   clearNewTaskRequest: () => void;
+  setPendingExpandId: (id: string | null) => void;
   setSearchFocused: (focused: boolean) => void;
   setQuickEntryOpen: (open: boolean) => void;
 }
@@ -40,6 +42,7 @@ export const useUIStore = create<UIState>((set) => ({
   activeProjectId: null,
   openPicker: null,
   newTaskRequested: false,
+  pendingExpandId: null,
   searchFocused: false,
   quickEntryOpen: false,
 
@@ -54,6 +57,7 @@ export const useUIStore = create<UIState>((set) => ({
   setOpenPicker: (picker) => set({ openPicker: picker }),
   requestNewTask: () => set({ newTaskRequested: true }),
   clearNewTaskRequest: () => set({ newTaskRequested: false }),
+  setPendingExpandId: (id) => set({ pendingExpandId: id }),
   setSearchFocused: (focused) => set({ searchFocused: focused }),
   setQuickEntryOpen: (open) => set({ quickEntryOpen: open }),
 }));
