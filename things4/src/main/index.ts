@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow } from "electron";
+import { app, shell, BrowserWindow, globalShortcut } from "electron";
 import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import { initializeDatabase, getDatabase } from "./db/connection";
@@ -57,9 +57,22 @@ app.whenReady().then(() => {
 
   createWindow();
 
+  globalShortcut.register("Ctrl+Space", () => {
+    const win = BrowserWindow.getAllWindows()[0];
+    if (win) {
+      win.webContents.send("quickentry:open");
+      if (!win.isVisible()) win.show();
+      win.focus();
+    }
+  });
+
   app.on("activate", function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
+});
+
+app.on("will-quit", () => {
+  globalShortcut.unregisterAll();
 });
 
 app.on("window-all-closed", () => {
