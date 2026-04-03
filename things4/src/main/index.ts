@@ -1,12 +1,13 @@
 import { app, shell, BrowserWindow } from "electron";
 import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
-import { initializeDatabase } from "./db/connection";
+import { initializeDatabase, getDatabase } from "./db/connection";
 import { registerTaskHandlers } from "./ipc/tasks";
 import { registerProjectHandlers } from "./ipc/projects";
 import { registerAreaHandlers } from "./ipc/areas";
 import { registerTagHandlers } from "./ipc/tags";
 import { registerSearchHandlers } from "./ipc/search";
+import { startMcpServer } from "./mcp/server";
 
 function createWindow(): void {
   const mainWindow = new BrowserWindow({
@@ -44,6 +45,9 @@ app.whenReady().then(() => {
   });
 
   initializeDatabase();
+  startMcpServer(getDatabase()).catch((e) => {
+    console.error("[things4] Failed to start MCP server:", e);
+  });
 
   registerTaskHandlers();
   registerProjectHandlers();
