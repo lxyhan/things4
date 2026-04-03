@@ -1,0 +1,16 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
+  outline: none;
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  font-size: var(--font-size-task-title);
+  color: var(--color-text-tertiary);
+  text-align: center;
+}

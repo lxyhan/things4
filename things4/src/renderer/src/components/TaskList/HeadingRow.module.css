@@ -1,0 +1,14 @@
+.heading {
+  display: flex;
+  align-items: center;
+  padding: 8px var(--task-row-padding-x) 4px;
+  user-select: none;
+}
+
+.title {
+  font-size: var(--font-size-meta);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}

@@ -1,0 +1,18 @@
+.checkbox {
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  flex-shrink: 0;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: calc(var(--checkbox-size) * 6) calc(var(--checkbox-size) * 5);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  display: block;
+}
+
+.checkbox:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
