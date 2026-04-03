@@ -32,6 +32,7 @@ export function Inbox(): React.JSX.Element {
 
   return (
     <div className={styles.container}>
+      <h1 className={styles.viewTitle}>Inbox</h1>
       <TaskList tasks={tasks} view="inbox" />
     </div>
   );

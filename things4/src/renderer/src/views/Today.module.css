@@ -5,6 +5,15 @@
   color: var(--color-text-primary);
 }
 
+.viewTitle {
+  font-size: var(--font-size-section-header);
+  font-weight: var(--font-weight-bold);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+  color: var(--color-text-primary);
+  margin: 0 0 16px 0;
+  padding-left: var(--task-row-padding-x);
+}
+
 .empty {
   color: var(--color-text-tertiary);
   font-size: var(--font-size-task-title);

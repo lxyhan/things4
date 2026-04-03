@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AreaGroup } from "./AreaGroup";
+import { ProjectRow } from "./ProjectRow";
 import { useUIStore } from "../../stores/uiStore";
 import type { ViewId } from "../../stores/uiStore";
 import type { Area, Project } from "../../../../types";
@@ -10,12 +11,6 @@ interface ProjectWithCounts extends Project {
   totalCount: number;
 }
 
-interface SidebarProps {
-  areas?: Area[];
-  projectsByArea?: Record<string, ProjectWithCounts[]>;
-  ungroupedProjects?: ProjectWithCounts[];
-}
-
 const SYSTEM_VIEWS: { id: ViewId; label: string; icon: string }[] = [
   { id: "inbox", label: "Inbox", icon: "●" },
   { id: "today", label: "Today", icon: "★" },
@@ -24,12 +19,43 @@ const SYSTEM_VIEWS: { id: ViewId; label: string; icon: string }[] = [
   { id: "logbook", label: "Logbook", icon: "↗" },
 ];
 
-export function Sidebar({
-  areas = [],
-  projectsByArea = {},
-  ungroupedProjects = [],
-}: SidebarProps): React.JSX.Element {
+export function Sidebar(): React.JSX.Element {
   const { activeView, setActiveView } = useUIStore();
+  const [areas, setAreas] = useState<Area[]>([]);
+  const [projects, setProjects] = useState<ProjectWithCounts[]>([]);
+
+  useEffect(() => {
+    window.api?.areas
+      ?.list()
+      .then(setAreas)
+      .catch(() => undefined);
+
+    window.api?.projects
+      ?.list()
+      .then((ps) => {
+        setProjects(
+          ps
+            .filter((p) => p.status === "active")
+            .map((p) => ({
+              ...p,
+              completedCount: p.completed_tasks ?? 0,
+              totalCount: p.total_tasks ?? 0,
+            })),
+        );
+      })
+      .catch(() => undefined);
+  }, []);
+
+  const projectsByArea: Record<string, ProjectWithCounts[]> = {};
+  const ungroupedProjects: ProjectWithCounts[] = [];
+
+  for (const p of projects) {
+    if (p.area_id) {
+      (projectsByArea[p.area_id] ??= []).push(p);
+    } else {
+      ungroupedProjects.push(p);
+    }
+  }
 
   return (
     <nav className={styles.sidebar}>
@@ -56,13 +82,12 @@ export function Sidebar({
           {ungroupedProjects.length > 0 && (
             <div className={styles.ungrouped}>
               {ungroupedProjects.map((p) => (
-                <button
+                <ProjectRow
                   key={p.id}
-                  className={`${styles.viewItem} ${activeView === "project" ? styles.viewItemActive : ""}`}
-                  onClick={() => useUIStore.getState().setActiveProjectId(p.id)}
-                >
-                  <span className={styles.viewLabel}>{p.title}</span>
-                </button>
+                  project={p}
+                  completedCount={p.completedCount}
+                  totalCount={p.totalCount}
+                />
               ))}
             </div>
           )}

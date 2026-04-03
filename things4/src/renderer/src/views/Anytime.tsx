@@ -80,6 +80,7 @@ export function Anytime(): React.JSX.Element {
   if (tasks.length === 0) {
     return (
       <div className={styles.container}>
+        <h1 className={styles.viewTitle}>Anytime</h1>
         <div className={styles.empty}>No tasks</div>
       </div>
     );
@@ -91,6 +92,7 @@ export function Anytime(): React.JSX.Element {
 
   return (
     <div className={styles.container}>
+      <h1 className={styles.viewTitle}>Anytime</h1>
       {groups.map((group) => (
         <section key={group.label} className={styles.group}>
           <h2 className={styles.groupHeader}>{group.label}</h2>

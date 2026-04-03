@@ -12,7 +12,7 @@ type ListItem =
   | { kind: "heading"; heading: Heading };
 
 const EMPTY_STATE_MESSAGES: Record<ViewId, string> = {
-  inbox: "Your Inbox is empty.",
+  inbox: "Your inbox is clear.",
   today: "Nothing planned for today.",
   upcoming: "Nothing coming up.",
   anytime: "No tasks anytime.",
@@ -35,8 +35,11 @@ export function TaskList({
 }: TaskListProps): React.JSX.Element {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [exitingIds, setExitingIds] = useState<Set<string>>(new Set());
   const containerRef = useRef<HTMLDivElement>(null);
   const { pendingExpandId, setPendingExpandId } = useUIStore();
+  const prevTasksRef = useRef<Task[]>([]);
+  const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     if (pendingExpandId) {
@@ -45,13 +48,58 @@ export function TaskList({
     }
   }, [pendingExpandId, setPendingExpandId]);
 
+  // Detect newly completed/cancelled tasks and trigger exit animation
+  useEffect(() => {
+    const prevTasks = prevTasksRef.current;
+    const newlyExiting: string[] = [];
+
+    if (view !== "logbook") {
+      for (const prev of prevTasks) {
+        const current = tasks.find((t) => t.id === prev.id);
+        if (
+          current &&
+          current.status !== "active" &&
+          prev.status === "active"
+        ) {
+          newlyExiting.push(prev.id);
+        }
+      }
+    }
+
+    prevTasksRef.current = tasks;
+
+    if (newlyExiting.length === 0) return;
+
+    setExitingIds((prev) => {
+      const next = new Set(prev);
+      newlyExiting.forEach((id) => next.add(id));
+      return next;
+    });
+
+    if (exitTimerRef.current !== null) clearTimeout(exitTimerRef.current);
+    exitTimerRef.current = setTimeout(() => {
+      exitTimerRef.current = null;
+      setExitingIds((prev) => {
+        const next = new Set(prev);
+        newlyExiting.forEach((id) => next.delete(id));
+        return next;
+      });
+    }, 280);
+  }, [tasks, view]);
+
+  // Filter tasks: for non-logbook views, only show active tasks or those exiting
+  const visibleTasks =
+    view === "logbook"
+      ? tasks
+      : tasks.filter((t) => t.status === "active" || exitingIds.has(t.id));
+
   // Build interleaved list
   const items: ListItem[] = [];
   if (headings.length > 0) {
     // Group tasks under headings
     const tasksByHeading: Record<string, Task[]> = {};
     const ungrouped: Task[] = [];
-    for (const t of tasks) {
+    for (const t of visibleTasks) {
       if (t.heading_id) {
         (tasksByHeading[t.heading_id] ??= []).push(t);
       } else {
@@ -68,7 +116,7 @@ export function TaskList({
       }
     }
   } else {
-    for (const t of tasks) {
+    for (const t of visibleTasks) {
       items.push({ kind: "task", task: t });
     }
   }
@@ -104,7 +152,7 @@ export function TaskList({
     return () => el.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
-  if (tasks.length === 0) {
+  if (visibleTasks.length === 0 && exitingIds.size === 0) {
     return (
       <div className={styles.empty} role="status">
         {EMPTY_STATE_MESSAGES[view]}
@@ -119,7 +167,7 @@ export function TaskList({
       tabIndex={0}
       aria-label="Task list"
     >
-      {items.map((item, idx) => {
+      {items.map((item) => {
         if (item.kind === "heading") {
           return <HeadingRow key={item.heading.id} heading={item.heading} />;
         }
@@ -128,21 +176,24 @@ export function TaskList({
         const taskIdx = taskIds.indexOf(task.id);
         const isExpanded = expandedId === task.id;
         const isSelected = taskIdx === selectedIndex;
+        const isExiting = exitingIds.has(task.id);
         const showTodayStar = view === "anytime" && todayTaskIds.has(task.id);
 
         return (
           <React.Fragment key={task.id}>
-            <TaskRow
-              task={task}
-              isSelected={isSelected}
-              isExpanded={isExpanded}
-              showTodayStar={showTodayStar}
-              onSelect={() => setSelectedIndex(taskIdx)}
-              onExpand={(id) => setExpandedId(id)}
-            />
-            {isExpanded && (
-              <TaskCard task={task} onCollapse={() => setExpandedId(null)} />
-            )}
+            <div className={isExiting ? styles.exiting : undefined}>
+              <TaskRow
+                task={task}
+                isSelected={isSelected}
+                isExpanded={isExpanded}
+                showTodayStar={showTodayStar}
+                onSelect={() => setSelectedIndex(taskIdx)}
+                onExpand={(id) => setExpandedId(id)}
+              />
+              {isExpanded && (
+                <TaskCard task={task} onCollapse={() => setExpandedId(null)} />
+              )}
+            </div>
           </React.Fragment>
         );
       })}

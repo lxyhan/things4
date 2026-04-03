@@ -95,6 +95,12 @@
   color: var(--color-text-placeholder);
 }
 
+.checklistSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .checklist {
   list-style: none;
   padding: 0;
@@ -103,6 +109,23 @@
   flex-direction: column;
   gap: 6px;
   padding-left: var(--checklist-indent);
+}
+
+.newChecklistInput {
+  font-size: var(--font-size-checklist);
+  font-family: var(--font-family);
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: none;
+  border-bottom: 1px dashed var(--color-border);
+  outline: none;
+  padding: 3px 0 3px var(--checklist-indent);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.newChecklistInput::placeholder {
+  color: var(--color-text-placeholder);
 }
 
 .checklistItem {

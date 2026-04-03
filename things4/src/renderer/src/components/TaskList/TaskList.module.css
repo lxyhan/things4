@@ -14,3 +14,26 @@
   color: var(--color-text-tertiary);
   text-align: center;
 }
+
+.exiting {
+  animation: taskExit 280ms ease-in forwards;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+@keyframes taskExit {
+  0% {
+    opacity: 1;
+    max-height: 200px;
+    transform: translateX(0);
+  }
+  40% {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  100% {
+    opacity: 0;
+    max-height: 0;
+    transform: translateX(12px);
+  }
+}

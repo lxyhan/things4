@@ -21,6 +21,7 @@ export function Today(): React.JSX.Element {
 
   return (
     <div className={styles.container}>
+      <h1 className={styles.viewTitle}>Today</h1>
       {mainTasks.length > 0 && <TaskList tasks={mainTasks} view="today" />}
 
       {mainTasks.length === 0 && eveningTasks.length === 0 && (

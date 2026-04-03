@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import type { ChecklistItem, Task } from "../../../../types";
 import { useTaskStore } from "../../stores/taskStore";
 import { useUIStore } from "../../stores/uiStore";
@@ -38,6 +39,7 @@ export function TaskCard({
   const [checklist, setChecklist] = useState<ChecklistItem[]>(
     task.checklist ?? [],
   );
+  const [newChecklistItem, setNewChecklistItem] = useState("");
   const [whenDate, setWhenDate] = useState<string | null>(task.when_date);
   const [deadline, setDeadline] = useState<string | null>(task.deadline);
   const [tagIds, setTagIds] = useState<string[]>([]);
@@ -113,6 +115,18 @@ export function TaskCard({
         item.id === id ? { ...item, completed: !item.completed } : item,
       ),
     );
+  }
+
+  function handleAddChecklistItem(e: React.KeyboardEvent<HTMLInputElement>): void {
+    if (e.key === "Enter" && newChecklistItem.trim()) {
+      const item: ChecklistItem = {
+        id: uuidv4(),
+        title: newChecklistItem.trim(),
+        completed: false,
+      };
+      setChecklist((prev) => [...prev, item]);
+      setNewChecklistItem("");
+    }
   }
 
   async function handleTagChange(newIds: string[]): Promise<void> {
@@ -232,42 +246,49 @@ export function TaskCard({
         rows={3}
       />
 
-      {checklist.length > 0 && (
-        <ul className={styles.checklist}>
-          {checklist.map((item) => (
-            <li key={item.id} className={styles.checklistItem}>
-              <input
-                type="checkbox"
-                checked={item.completed}
-                onChange={() => handleChecklistToggle(item.id)}
-                className={styles.checklistCheckbox}
-              />
-              <span
-                className={[
-                  styles.checklistTitle,
-                  item.completed ? styles.checklistDone : "",
-                ]
-                  .filter(Boolean)
-                  .join(" ")}
-              >
-                {item.title}
-              </span>
-            </li>
-          ))}
-        </ul>
-      )}
+      <div className={styles.checklistSection}>
+        {checklist.length > 0 && (
+          <ul className={styles.checklist}>
+            {checklist.map((item) => (
+              <li key={item.id} className={styles.checklistItem}>
+                <input
+                  type="checkbox"
+                  checked={item.completed}
+                  onChange={() => handleChecklistToggle(item.id)}
+                  className={styles.checklistCheckbox}
+                />
+                <span
+                  className={[
+                    styles.checklistTitle,
+                    item.completed ? styles.checklistDone : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                >
+                  {item.title}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+        <input
+          className={styles.newChecklistInput}
+          value={newChecklistItem}
+          onChange={(e) => setNewChecklistItem(e.target.value)}
+          onKeyDown={handleAddChecklistItem}
+          placeholder="Add checklist item…"
+        />
+      </div>
 
-      {(task.waiting_for || task.waiting_since) && (
-        <div className={styles.waitingRow}>
-          <span className={styles.waitingLabel}>Waiting for</span>
-          <input
-            className={styles.waitingInput}
-            value={waitingFor}
-            onChange={(e) => setWaitingFor(e.target.value)}
-            placeholder="Person or thing"
-          />
-        </div>
-      )}
+      <div className={styles.waitingRow}>
+        <span className={styles.waitingLabel}>Waiting for</span>
+        <input
+          className={styles.waitingInput}
+          value={waitingFor}
+          onChange={(e) => setWaitingFor(e.target.value)}
+          placeholder="Person or thing"
+        />
+      </div>
 
       <div className={styles.actions}>
         <button

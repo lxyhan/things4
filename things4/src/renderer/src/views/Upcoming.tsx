@@ -150,6 +150,7 @@ export function Upcoming(): React.JSX.Element {
   if (groups.length === 0) {
     return (
       <div className={styles.container}>
+        <h1 className={styles.viewTitle}>Upcoming</h1>
         <div className={styles.empty}>Nothing upcoming</div>
       </div>
     );
@@ -157,6 +158,7 @@ export function Upcoming(): React.JSX.Element {
 
   return (
     <div className={styles.container}>
+      <h1 className={styles.viewTitle}>Upcoming</h1>
       {groups.map((group) => (
         <section key={group.key} className={styles.group}>
           <h2

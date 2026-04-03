@@ -60,6 +60,7 @@ export function Logbook(): React.JSX.Element {
   if (tasks.length === 0) {
     return (
       <div className={styles.container}>
+        <h1 className={styles.viewTitle}>Logbook</h1>
         <div className={styles.empty}>No completed items</div>
       </div>
     );
@@ -69,6 +70,7 @@ export function Logbook(): React.JSX.Element {
 
   return (
     <div className={styles.container}>
+      <h1 className={styles.viewTitle}>Logbook</h1>
       {groups.map((group) => (
         <section key={group.dateKey} className={styles.group}>
           <h2 className={styles.groupHeader}>{group.label}</h2>
