@@ -32,7 +32,7 @@
       {
         "from": "build/",
         "to": ".",
-        "filter": ["icon.*"]
+        "filter": ["icon.icns", "icon.png"]
       }
     ],
     "mac": {

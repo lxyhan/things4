@@ -1,12 +1,13 @@
 import type Database from "better-sqlite3";
 import { v4 as uuidv4 } from "uuid";
 
-const now = new Date().toISOString();
-const today = new Date().toISOString().split("T")[0];
-const tomorrow = new Date(Date.now() + 86400000).toISOString().split("T")[0];
-const nextWeek = new Date(Date.now() + 7 * 86400000).toISOString().split("T")[0];
-
 export function insertSeedData(db: Database.Database): void {
+  const now = new Date().toISOString();
+  const today = new Date().toISOString().split("T")[0];
+  const tomorrow = new Date(Date.now() + 86400000).toISOString().split("T")[0];
+  const nextWeek = new Date(Date.now() + 7 * 86400000).toISOString().split("T")[0];
+
+  db.transaction(() => {
   // Areas
   const areaWorkId = uuidv4();
   const areaPersonalId = uuidv4();
@@ -197,4 +198,5 @@ export function insertSeedData(db: Database.Database): void {
   db.prepare(`INSERT INTO task_tags (task_id, tag_id) VALUES (?, ?)`).run(task3, tagFocusId);
   db.prepare(`INSERT INTO task_tags (task_id, tag_id) VALUES (?, ?)`).run(task6, tagWaitingId);
   db.prepare(`INSERT INTO task_tags (task_id, tag_id) VALUES (?, ?)`).run(task8, tagQuickId);
+  })();
 }
