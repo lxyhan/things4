@@ -52,6 +52,9 @@ declare global {
         }) => Promise<Tag>;
         update: (id: string, input: Partial<Tag>) => Promise<Tag>;
         delete: (id: string) => Promise<void>;
+        forTask: (taskId: string) => Promise<Tag[]>;
+        attachToTask: (tagId: string, taskId: string) => Promise<void>;
+        detachFromTask: (tagId: string, taskId: string) => Promise<void>;
       };
       projects?: {
         list: () => Promise<Project[]>;

@@ -32,9 +32,13 @@ function MainContent(): React.JSX.Element {
 }
 
 function App(): React.JSX.Element {
-  const { quickEntryOpen, setQuickEntryOpen } = useUIStore();
+  const { quickEntryOpen, setQuickEntryOpen, theme } = useUIStore();
 
   useKeyboard();
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
 
   useEffect(() => {
     const handler = (): void => setQuickEntryOpen(true);

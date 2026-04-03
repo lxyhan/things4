@@ -36,4 +36,8 @@ export function registerTagHandlers(): void {
     (_event, tagId: string, projectId: string) =>
       tags.detachFromProject(tagId, projectId),
   );
+
+  ipcMain.handle("tags:forTask", (_event, taskId: string) =>
+    tags.forTask(taskId),
+  );
 }

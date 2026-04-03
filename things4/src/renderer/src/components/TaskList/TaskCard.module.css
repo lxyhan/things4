@@ -47,30 +47,33 @@
   color: var(--color-text-placeholder);
 }
 
-.pills {
+.toolbar {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 
-.pill {
-  display: flex;
-  align-items: center;
-  gap: 4px;
+.toolbarBtn {
   font-size: var(--font-size-meta);
-  color: var(--color-text-secondary);
-  background-color: var(--color-bg-tag);
-  padding: 3px 8px;
-  border-radius: var(--radius-pill);
-}
-
-.pillLabel {
-  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family);
   color: var(--color-text-tertiary);
+  background-color: var(--color-bg-tag);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+  cursor: pointer;
+  line-height: var(--line-height-ui);
 }
 
-.pillDeadline {
-  color: var(--color-deadline-soon);
+.toolbarBtn:hover {
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.toolbarBtnActive {
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-task-hover);
+  border-color: var(--color-border);
 }
 
 .notes {

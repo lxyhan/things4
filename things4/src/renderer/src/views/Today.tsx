@@ -1,27 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTaskStore } from "../stores/taskStore";
-import type { Task } from "../../../types";
+import { TaskList } from "../components/TaskList/TaskList";
 import styles from "./Today.module.css";
-
-function todayISO(): string {
-  return new Date().toISOString().slice(0, 10);
-}
-
-function isOverdue(task: Task): boolean {
-  if (!task.deadline) return false;
-  return task.deadline < todayISO();
-}
-
-function isDeadlineToday(task: Task): boolean {
-  if (!task.deadline) return false;
-  return task.deadline === todayISO();
-}
-
-function deadlineClass(task: Task): string {
-  if (isOverdue(task)) return styles.deadlineOver;
-  if (isDeadlineToday(task)) return styles.deadlineSoon;
-  return "";
-}
 
 export function Today(): React.JSX.Element {
   const { tasksByView, loading, loadTasks } = useTaskStore();
@@ -41,25 +21,7 @@ export function Today(): React.JSX.Element {
 
   return (
     <div className={styles.container}>
-      {mainTasks.length > 0 && (
-        <ul className={styles.taskList}>
-          {mainTasks.map((task) => (
-            <li
-              key={task.id}
-              className={`${styles.taskRow} ${deadlineClass(task)}`}
-            >
-              <span className={styles.taskTitle}>{task.title}</span>
-              {task.deadline && (
-                <span
-                  className={`${styles.deadlineBadge} ${deadlineClass(task)}`}
-                >
-                  {task.deadline}
-                </span>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
+      {mainTasks.length > 0 && <TaskList tasks={mainTasks} view="today" />}
 
       {mainTasks.length === 0 && eveningTasks.length === 0 && (
         <div className={styles.empty}>Nothing for today</div>
@@ -77,18 +39,7 @@ export function Today(): React.JSX.Element {
               {eveningCollapsed ? "▶" : "▼"}
             </span>
           </button>
-          {!eveningCollapsed && (
-            <ul className={styles.taskList}>
-              {eveningTasks.map((task) => (
-                <li
-                  key={task.id}
-                  className={`${styles.taskRow} ${deadlineClass(task)}`}
-                >
-                  <span className={styles.taskTitle}>{task.title}</span>
-                </li>
-              ))}
-            </ul>
-          )}
+          {!eveningCollapsed && <TaskList tasks={eveningTasks} view="today" />}
         </section>
       )}
     </div>

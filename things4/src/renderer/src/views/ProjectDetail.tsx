@@ -1,20 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import type { Project, Task } from "../../../types";
 import { ProgressPie } from "../components/ProgressPie/ProgressPie";
+import { TaskList } from "../components/TaskList/TaskList";
 import styles from "./ProjectDetail.module.css";
-
-// Stub TaskList — replaced during Phase 5 integration
-function TaskList({ tasks }: { tasks: Task[] }): React.JSX.Element {
-  return (
-    <ul className={styles.taskList}>
-      {tasks.map((task) => (
-        <li key={task.id} className={styles.taskRow}>
-          <span className={styles.taskTitle}>{task.title}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
 
 interface HeadingGroup {
   headingId: string | null;
@@ -84,8 +72,8 @@ export function ProjectDetail({
       .then((all) => {
         const p = all.find((x) => x.id === projectId);
         if (p) {
-          setTotalTasks(p.total_tasks);
-          setCompletedTasks(p.completed_tasks);
+          setTotalTasks(p.total_tasks ?? 0);
+          setCompletedTasks(p.completed_tasks ?? 0);
         }
       })
       .catch(() => undefined);
@@ -171,7 +159,7 @@ export function ProjectDetail({
             {group.headingId !== null && (
               <h2 className={styles.headingTitle}>{group.headingId}</h2>
             )}
-            <TaskList tasks={group.tasks} />
+            <TaskList tasks={group.tasks} view="project" />
           </section>
         ))}
         {tasks.length === 0 && (

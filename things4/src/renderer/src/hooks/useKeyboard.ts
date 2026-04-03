@@ -53,7 +53,7 @@ export function useKeyboard(): void {
 
     function findTask(id: string): Task | null {
       for (const list of Object.values(tasks.tasksByView)) {
-        const found = list.find((t) => t.id === id);
+        const found = list.find((t: Task) => t.id === id);
         if (found) return found;
       }
       return null;

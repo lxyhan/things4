@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useTaskStore } from "../stores/taskStore";
 import type { Task } from "../../../types";
+import { TaskList } from "../components/TaskList/TaskList";
 import styles from "./Upcoming.module.css";
 
 function todayISO(): string {
@@ -132,9 +133,6 @@ function buildGroups(tasks: Task[]): Group[] {
   });
 }
 
-async function rescheduleTask(taskId: string, newDate: string): Promise<void> {
-  await window.api?.tasks?.update(taskId, { when_date: newDate });
-}
 
 export function Upcoming(): React.JSX.Element {
   const { tasksByView, loading, loadTasks } = useTaskStore();
@@ -173,33 +171,7 @@ export function Upcoming(): React.JSX.Element {
           >
             {group.label}
           </h2>
-          <ul className={styles.taskList}>
-            {group.tasks.map((task) => (
-              <li
-                key={task.id}
-                className={styles.taskRow}
-                draggable
-                onDragStart={(e) => e.dataTransfer.setData("taskId", task.id)}
-              >
-                <span className={styles.taskTitle}>{task.title}</span>
-              </li>
-            ))}
-          </ul>
-          {/* Drop target for rescheduling */}
-          <div
-            className={styles.dropZone}
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={(e) => {
-              e.preventDefault();
-              const taskId = e.dataTransfer.getData("taskId");
-              const targetDate = group.key.split(":")[1];
-              if (taskId && targetDate) {
-                rescheduleTask(taskId, targetDate)
-                  .then(() => loadTasks("upcoming"))
-                  .catch(() => undefined);
-              }
-            }}
-          />
+          <TaskList tasks={group.tasks} view="upcoming" />
         </section>
       ))}
     </div>

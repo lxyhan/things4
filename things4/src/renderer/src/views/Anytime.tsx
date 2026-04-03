@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTaskStore } from "../stores/taskStore";
 import type { Task, Project, Area } from "../../../types";
+import { TaskList } from "../components/TaskList/TaskList";
 import styles from "./Anytime.module.css";
 
 function todayISO(): string {
@@ -86,26 +87,18 @@ export function Anytime(): React.JSX.Element {
 
   const groups = buildGroups(tasks, projects, areas);
 
+  const todayTaskIds = new Set(tasks.filter(isInToday).map((t) => t.id));
+
   return (
     <div className={styles.container}>
       {groups.map((group) => (
         <section key={group.label} className={styles.group}>
           <h2 className={styles.groupHeader}>{group.label}</h2>
-          <ul className={styles.taskList}>
-            {group.tasks.map((task) => (
-              <li key={task.id} className={styles.taskRow}>
-                <span className={styles.taskTitle}>{task.title}</span>
-                {isInToday(task) && (
-                  <span
-                    className={styles.todayStar}
-                    title={`Scheduled: ${task.when_date}`}
-                  >
-                    ★
-                  </span>
-                )}
-              </li>
-            ))}
-          </ul>
+          <TaskList
+            tasks={group.tasks}
+            view="anytime"
+            todayTaskIds={todayTaskIds}
+          />
         </section>
       ))}
     </div>

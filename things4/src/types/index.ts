@@ -47,6 +47,9 @@ export interface Project {
   created_at: string;
   updated_at: string;
   completed_at: string | null;
+  total_tasks?: number;
+  completed_tasks?: number;
+  progress?: number;
 }
 
 export interface Area {
