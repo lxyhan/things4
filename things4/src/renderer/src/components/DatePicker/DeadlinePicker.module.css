@@ -1,0 +1,151 @@
+.container {
+  position: fixed;
+  z-index: 1000;
+  width: 280px;
+  background: var(--color-bg-main);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-popover);
+  padding: 8px;
+  outline: none;
+  font-family: var(--font-family);
+}
+
+/* Urgency banner */
+.urgencyBanner {
+  text-align: center;
+  font-size: var(--font-size-meta);
+  font-weight: var(--font-weight-semibold);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+}
+
+.urgencyNormal {
+  color: var(--color-deadline-soon);
+  background: rgba(255, 149, 0, 0.08);
+}
+
+.urgencyOverdue {
+  color: var(--color-deadline-over);
+  background: rgba(255, 59, 48, 0.08);
+}
+
+/* Natural language input */
+.nlRow {
+  margin-bottom: 8px;
+}
+
+.nlInput {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 8px;
+  background: var(--color-bg-accent-header);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family);
+  font-size: var(--font-size-meta);
+  color: var(--color-text-primary);
+  outline: none;
+}
+
+.nlInput::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.nlInput:focus {
+  border-color: var(--color-accent);
+}
+
+/* Month header */
+.monthHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.navBtn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  line-height: 1;
+}
+
+.navBtn:hover {
+  background: var(--color-bg-task-hover);
+  color: var(--color-text-primary);
+}
+
+.monthLabel {
+  font-size: var(--font-size-meta);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+/* Calendar grid */
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+}
+
+.dayLabel {
+  text-align: center;
+  font-size: 10px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-tertiary);
+  padding: 2px 0 4px;
+}
+
+.dayEmpty {
+  /* placeholder */
+}
+
+.dayCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-meta);
+  color: var(--color-text-primary);
+  padding: 0;
+}
+
+.dayCell:hover {
+  background: var(--color-bg-task-hover);
+}
+
+.dayCellToday {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-accent);
+}
+
+.dayCellSelected {
+  background: var(--color-deadline-soon) !important;
+  color: #ffffff !important;
+  font-weight: var(--font-weight-semibold);
+}
+
+.dayCellFocused {
+  outline: 2px solid var(--color-deadline-soon);
+  outline-offset: -2px;
+}
+
+.dayCellPast {
+  color: var(--color-text-tertiary);
+}

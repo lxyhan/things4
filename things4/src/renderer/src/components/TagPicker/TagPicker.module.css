@@ -1,0 +1,121 @@
+.container {
+  position: fixed;
+  z-index: 1000;
+  width: 220px;
+  background: var(--color-bg-main);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-popover);
+  padding: 6px;
+  outline: none;
+  font-family: var(--font-family);
+}
+
+.searchRow {
+  margin-bottom: 4px;
+}
+
+.searchInput {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 8px;
+  background: var(--color-bg-accent-header);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family);
+  font-size: var(--font-size-meta);
+  color: var(--color-text-primary);
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.searchInput:focus {
+  border-color: var(--color-accent);
+}
+
+.list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.empty {
+  padding: 8px;
+  text-align: center;
+  font-size: var(--font-size-meta);
+  color: var(--color-text-tertiary);
+}
+
+.tagRow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 5px 8px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-meta);
+  color: var(--color-text-primary);
+  text-align: left;
+  gap: 6px;
+}
+
+.tagRow:hover {
+  background: var(--color-bg-task-hover);
+}
+
+.tagRowSelected {
+  background: rgba(0, 122, 255, 0.06);
+}
+
+.tagRowFocused {
+  background: var(--color-bg-task-hover);
+  outline: none;
+}
+
+.colorDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tagName {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shortcut {
+  font-size: 10px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-tertiary);
+  background: var(--color-bg-accent-header);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  flex-shrink: 0;
+}
+
+.checkmark {
+  font-size: 11px;
+  color: var(--color-accent);
+  font-weight: var(--font-weight-semibold);
+  flex-shrink: 0;
+}
+
+.createRow {
+  color: var(--color-accent);
+}
+
+.createIcon {
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
